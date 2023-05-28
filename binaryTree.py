@@ -87,10 +87,14 @@ class BinarySortTree():
                     changeNode = changeNode.right
 
                 currentNode.value = changeNode.value
-                if changeNode.left is not None:
+                if changeNode.left is not None and not changeNode == changeParentNode:
                     changeParentNode.right = changeNode.left
-                else:
+                elif changeNode.left is None and not changeNode == changeParentNode:
                     changeParentNode.right = None 
+                elif changeNode == changeParentNode:
+                    currentNode.left = changeNode.left
+                else:
+                    print("예외 발생 ")
         return isSearch
 arr = [5, 2, 4, 22, 10, 12, 15, 60, 44, 9]
 root = 30
@@ -107,3 +111,12 @@ print(bst.delete(22))
 print(bst.delete(44)) 
 print(bst.search(22)) 
 print(bst.search(44)) 
+root = 10
+bst1 = BinarySortTree(root)
+bst1.insert(9)
+bst1.insert(2)
+bst1.insert(1)
+bst1.insert(4)
+print(bst1.search(2))
+print(bst1.delete(2))
+print(bst1.search(2))
